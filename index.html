@@ -1,72 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#111827" />
-  <title>Roteiros Práticos de Anatomia</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Casos Clínicos — Anatomia Humana</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <p class="eyebrow">PWA • Aula prática</p>
-      <h1>Roteiros Práticos de Anatomia</h1>
-      <p class="subtitle">Articulações e Sistema Muscular — registros por estrutura com foto, anexos e PDF geral.</p>
-    </div>
-    <div class="actions no-print">
-      <button id="installBtn" class="ghost hidden">Instalar app</button>
-      <button id="exportBtn" class="primary">Gerar PDF de tudo</button>
-      <button id="clearBtn" class="danger">Limpar registros</button>
-    </div>
-  </header>
+<header>
+  <h1>Casos Clínicos — Anatomia Humana</h1>
+  <p>Curso de Ciências Biológicas | Macroscopia</p>
+  <div class="toolbar">
+    <button onclick="filtrar('todos')">Todos</button>
+    <button onclick="filtrar('muscular')">Muscular</button>
+    <button onclick="filtrar('esqueletico')">Esquelético</button>
+    <button onclick="filtrar('geral')">Termos Anatômicos</button>
+    <button onclick="gerarPDF()">Gerar PDF</button>
+  </div>
+</header>
 
-  <main>
-    <section class="toolbar no-print">
-      <input id="search" type="search" placeholder="Pesquisar estrutura, grupo ou roteiro..." />
-      <select id="roteiroFilter">
-        <option value="todos">Todos os roteiros</option>
-        <option value="Articulações">Articulações</option>
-        <option value="Sistema Muscular">Sistema Muscular</option>
-      </select>
-      <select id="statusFilter">
-        <option value="todos">Todos</option>
-        <option value="com-foto">Com foto</option>
-        <option value="com-arquivo">Com arquivo</option>
-        <option value="pendente">Pendentes</option>
-      </select>
-    </section>
+<main id="cards"></main>
 
-    <section class="summary" id="summary"></section>
-    <section id="cards" class="grid"></section>
-  </main>
+<footer>
+  <p>PWA acadêmico — respostas ocultas para uso didático.</p>
+</footer>
 
-  <template id="cardTemplate">
-    <article class="card">
-      <div class="card-head">
-        <span class="badge roteiro"></span>
-        <span class="badge grupo"></span>
-      </div>
-      <h2></h2>
-      <p class="meta"></p>
-      <textarea class="notes" placeholder="Incluir anotações da prática, identificação, função, localização ou observações..."></textarea>
-      <div class="preview"></div>
-      <div class="file-list"></div>
-      <div class="card-actions no-print">
-        <label class="file-btn camera">
-          📷 Tirar foto individual
-          <input class="photoInput" type="file" accept="image/*" capture="environment" hidden />
-        </label>
-        <label class="file-btn attach">
-          📎 Incluir arquivo
-          <input class="fileInput" type="file" multiple hidden />
-        </label>
-      </div>
-    </article>
-  </template>
-
-  <footer class="footer">Fonte dos conteúdos: roteiros enviados pela professora.</footer>
-  <script src="app.js"></script>
+<script src="app.js"></script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+</script>
 </body>
 </html>
